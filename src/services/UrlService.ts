@@ -6,6 +6,10 @@ class UrlService {
   static signupUrl() { return 'api/auth/signup'; }
   //URL logout de nuestra api
   static logoutUrl() { return 'api/auth/logout'; }
+  //URL usuarios de nuestra api
+  static usersUrl() { return 'api/auth/user'; }
+  //URL ordenes del usuario de nuestra api
+  static ordersUrl() { return 'api/auth/orders'; }
 }
 
 export default UrlService;

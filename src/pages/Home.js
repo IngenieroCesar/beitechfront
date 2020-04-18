@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import ListUsers from '../components/ListUsers'
 
 
 class Home extends React.Component {
@@ -29,20 +30,24 @@ class Home extends React.Component {
         }
     }
 
-    eliminarToken(){
-        localStorage.setItem('token', 0)
-    }
-
     render(){
 
         return(
-            <div>
-                <Navbar 
+            <React.Fragment>
+
+                <Navbar                     
                     vinculos= {this.state.links}
+                />                       
+
+                <ListUsers
+                
                 />
-            <h1>Hello home</h1>
-            <a href="" onClick={this.eliminarToken}>Cerrar Sesión</a>
-            </div>
+
+
+
+
+            </React.Fragment>
+
             
         )
     }

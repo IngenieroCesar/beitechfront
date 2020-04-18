@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import './_style.scss';
 import UrlService from './../../services/UrlService';
 import FatalError from '../500'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
-class Login extends Component {
+class Login extends React.Component {
   state = {
     //Error para verificar si el seridor tiene conexión
     error: null,
@@ -14,7 +14,8 @@ class Login extends Component {
     password: '',
     isChecked: false
   }
-  //Consumimos nuestra API de back, Función asincrona
+  
+  
   async componentDidMount(){
     this.setState({
       //Cambiamos el estado de Loading cuando carguen nuestros datos
@@ -23,6 +24,7 @@ class Login extends Component {
     console.log(localStorage)
   }
 
+  //Consumimos nuestra API de back, Función asincrona
   async handleFormSubmit(event) {
     event.preventDefault();
     // Empaquetamos los datos del formulario en un objeto
@@ -45,11 +47,13 @@ class Login extends Component {
       let res = await fetch(UrlService.loginUrl(), config)
       //convertimos la respuesta
       let data = await res.json()
-      console.log(data)
+
+      // console.log(data)
       if(data.access_token){
+        const token = 'Bearer '+data.access_token
         //almacenamos nuesto token en la varialbe global para mantener nuestra sesión habilitada
-        localStorage.setItem('token', JSON.stringify(data.access_token))
-        console.log(localStorage)
+        localStorage.setItem('token', token)
+        // console.log(localStorage)
       }
       
       //Redireccionamos hacia la vista
