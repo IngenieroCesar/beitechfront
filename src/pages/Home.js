@@ -4,6 +4,24 @@ import Navbar from '../components/Navbar'
 
 class Home extends React.Component {
 
+    state = {
+        links : [
+            {
+            'nombre': 'Perfil', 
+            'link': '/perfil'
+            },
+            {
+            'nombre': 'Productos', 
+            'link': '/productos'
+            },
+            {
+            'nombre': 'Ordenes', 
+            'link': '/ordenes'
+            }
+        ]
+    }
+
+
 //comprobamos la sesión iniciada con el token en nuestra variable global
     componentDidMount(){
         if(localStorage.token == 0){
@@ -16,17 +34,11 @@ class Home extends React.Component {
     }
 
     render(){
-        const links = {
-            'Perfil': '/perfil', 
-            'Productos'}
-
-
-
 
         return(
             <div>
                 <Navbar 
-                    links: 
+                    vinculos= {this.state.links}
                 />
             <h1>Hello home</h1>
             <a href="" onClick={this.eliminarToken}>Cerrar Sesión</a>
