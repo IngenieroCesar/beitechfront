@@ -1,6 +1,7 @@
 import React from 'react'
-import ReactDom from 'react-dom'
+import ReactDOM from 'react-dom'
 import { render } from '@testing-library/react'
+import { BrowserRouter as Router } from 'react-router-dom'; 
 
 //Función nav bar que resive como props los links:
 class Navbar extends React.Component{
@@ -10,8 +11,10 @@ class Navbar extends React.Component{
     }
 
     // Eliminamos el token de neustra variable global
-    eliminarToken(){
+    eliminarToken = async e => {
         localStorage.setItem('token', 0)
+        //Redireccionamos hacia la vista
+        
         this.setState({
             //ocultamos el boton de cerrar sesión
             hidden: true
@@ -40,7 +43,7 @@ class Navbar extends React.Component{
                 <div className="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
                     <ul className="navbar-nav text-right">
                         <li className="nav-item active" hidden={this.state.hidden}>
-                            <a className="nav-link" onClick={this.eliminarToken}>Cerrar Sesion</a>
+                            <a href="/login" className="nav-link" onClick={this.eliminarToken}>Cerrar Sesion</a>
                         </li>
                     </ul>
                 </div>

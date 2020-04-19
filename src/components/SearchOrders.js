@@ -56,7 +56,6 @@ class SearchOrder extends React.Component{
         }
     }
 
-
     //traemos los datos del elemento y cambiamos el estado del modal
     showModal = async () => {
         await this.showModalEdit(this.props.userId)
@@ -75,9 +74,26 @@ class SearchOrder extends React.Component{
           })   
     };
 
+    //Convertimos el string en un array
+    stringtoArray(strng){
+        let array = strng.split(", ");
+        for (let index = 0; index < array.length; index++) {
+            //Le asignamos un salto de linea a cada elemento resivido
+            array[index] = <div>{array[index]}<br/></div>
+        
+        }
+
+        return array
+        
+
+    }
+
     
     render(){
+
         const {userId} = this.props
+        const orders = this.state.data
+
         return(
             <React.Fragment>
             <button className="btn btn-info" alt="Editar" title="Editar" onClick={this.showModal} value={userId}><FontAwesomeIcon icon={faEye} /></button>
@@ -125,16 +141,23 @@ class SearchOrder extends React.Component{
                                                     </tr>
                                                 </thead>
                                                 <tbody>                    
-   
-                                                    <tr>
-                                                    <th>{this.state.data.id}</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th>
+                                                {                                                        
+                                                // En este momento estamos usando la funcion map para iterar todos los elementos del arreglo,
+                                                orders.map((order) => {
+                                                        //Convertimos las cadenas en arreglos
+                                                                                            
 
-                                                    </th>
-                                                    </tr>      
-
+                                                    return(
+                                                        <tr key={order.orderid}>
+                                                        <th>{order.creationdate}</th>
+                                                        <th>{order.orderid}</th>
+                                                        <th>{order.total}</th>                                                        
+                                                        <th>{this.stringtoArray(order.products) }</th>
+                                                        <th>{this.stringtoArray(order.quantity) } </th>                                                          
+                                                        </tr>      
+                                                    )
+                                                    })
+                                                }
                                                 </tbody>
                                             </table>
                                         </div>
