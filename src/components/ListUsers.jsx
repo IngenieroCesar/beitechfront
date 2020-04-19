@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import UrlService from '../services/UrlService'
 import SearchOrders from '../components/SearchOrders'
+import Loading from './Loading'
+import FatalError from '../pages/500'
 
 //styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,6 +16,8 @@ class ListUsers extends React.Component {
     state = {
         data: [],
         token: localStorage.token,
+        loading: true,
+        error: null,
     }
 
     
@@ -41,7 +45,8 @@ class ListUsers extends React.Component {
             //Usamos nuestro state para renderizar la informacíon
             this.setState({
                 //Persistimos los datos en el estado del componente
-                data
+                data,
+                loading: false
             })
             
         } catch (error) {
@@ -53,6 +58,14 @@ class ListUsers extends React.Component {
 
 
     render(){
+        
+        if(this.state.loading){
+            return < Loading />
+        }
+        //Validamos si existen errores
+        if(this.state.error){
+            return <FatalError />
+        }
 
         const users = this.state.data
         return(

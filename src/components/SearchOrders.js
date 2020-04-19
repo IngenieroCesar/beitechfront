@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import UrlService from '../services/UrlService';
+import Loading from './Loading'
+import FatalError from '../pages/500'
 
 //Styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,14 +15,10 @@ class SearchOrder extends React.Component{
     state = {
         isOpen: false,
         data: [],
-        token: localStorage.token
+        token: localStorage.token,
+        loading: true,
+        error: null,
     }
-
-    // async componentDidMount(){
-    //     await this.showModalEdit(this.props.userId)
-    //     // console.log(this.state.token)
-    // }
-
 
     //Resivimos el id del evento, para traerlo de la API
     showModalEdit = async prop => {
@@ -48,10 +46,11 @@ class SearchOrder extends React.Component{
             //Usamos nuestro state para renderizar la informacíon
             this.setState({
                 //Persistimos los datos en el estado del componente
-                data
+                data,
+                loading: false
             })
-            
         } catch (error) {
+            //Resivimos los errores
             console.log(error)
         }
     }
@@ -63,7 +62,6 @@ class SearchOrder extends React.Component{
         this.setState({
             isOpen: true
         })   
-        
       };
 
     //Con esta función ocultamos el modal cambiando su estado
@@ -80,18 +78,27 @@ class SearchOrder extends React.Component{
         for (let index = 0; index < array.length; index++) {
             //Le asignamos un salto de linea a cada elemento resivido
             array[index] = <div>{array[index]}<br/></div>
-        
         }
-
         return array
-        
-
     }
 
-    
+    //Cargando
+    loading(){
+        if(this.state.loading){
+            return < Loading />
+        }
+    }
+
+
     render(){
 
+        //Validamos si existen errores
+        if(this.state.error){
+            return <FatalError />
+        }
+
         const {userId} = this.props
+        //Creamos una constante que resive todos los datos de nuestro estado, data[]
         const orders = this.state.data
 
         return(
@@ -102,6 +109,7 @@ class SearchOrder extends React.Component{
             onHide={this.hideModal}
             size="lg"
             aria-labelledby="example-modal-sizes-title-lg">
+                {this.loading()}
             
                 <Modal.Header>
                     <Modal.Title>Nombre del dueño</Modal.Title>
@@ -143,15 +151,13 @@ class SearchOrder extends React.Component{
                                                 <tbody>                    
                                                 {                                                        
                                                 // En este momento estamos usando la funcion map para iterar todos los elementos del arreglo,
-                                                orders.map((order) => {
-                                                        //Convertimos las cadenas en arreglos
-                                                                                            
-
+                                                orders.map((order) => {                               
                                                     return(
                                                         <tr key={order.orderid}>
                                                         <th>{order.creationdate}</th>
                                                         <th>{order.orderid}</th>
-                                                        <th>{order.total}</th>                                                        
+                                                        <th>{order.total}</th>       
+                                                        {/* LLAMAMOS A NUESTRA FUNCIÓN ARA CONVERTIR STRING EN ARREGLOS                                                  */}
                                                         <th>{this.stringtoArray(order.products) }</th>
                                                         <th>{this.stringtoArray(order.quantity) } </th>                                                          
                                                         </tr>      
