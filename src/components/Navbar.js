@@ -29,7 +29,7 @@ class Navbar extends React.Component{
                         // En este momento estamos usando la funcion map para iterar todos los elementos del arreglo,
                         vinculos.map((vinculo) => {
                             return(
-                                <li className="nav-item active">
+                                <li className="nav-item active" key= {vinculo.nombre}>
                                 <a className="nav-link" href={vinculo.link} >{vinculo.nombre}</a>
                                 </li>
                             )

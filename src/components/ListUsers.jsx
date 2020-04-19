@@ -37,7 +37,7 @@ class ListUsers extends React.Component {
             let res = await fetch(UrlService.usersUrl(), config)
             //convertimos la respuesta
             let data = await res.json()
-            console.log(data)
+            // console.log(data)
             //Usamos nuestro state para renderizar la informacíon
             this.setState({
                 //Persistimos los datos en el estado del componente
@@ -89,12 +89,13 @@ class ListUsers extends React.Component {
                                                 // En este momento estamos usando la funcion map para iterar todos los elementos del arreglo,
                                                 users.map((user) => {
                                                     return(
-                                                        <tr>
-                                                        <th>{user.id}</th>
-                                                        <th>{user.name}</th>
-                                                        <th>{user.email}</th>
+                                                        <tr key={user.id}>
+                                                        <th >{user.id}</th>
+                                                        <th >{user.name}</th>
+                                                        <th >{user.email}</th>
                                                         <th>
                                                             <SearchOrders
+                                                                
                                                                 userId={user.id}
                                                                 showModalEdit = {this.showModalEdit}
                                                                 onChange={this.handleChange} 
