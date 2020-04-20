@@ -1,6 +1,6 @@
 import React from "react";
-import './_style.scss';
 import UrlService from './../../services/UrlService';
+import '../../components/styles/style.css'
 import FatalError from '../500'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
@@ -53,6 +53,7 @@ class Login extends React.Component {
         const token = 'Bearer '+data.access_token
         //almacenamos nuesto token en la varialbe global para mantener nuestra sesión habilitada
         localStorage.setItem('token', token)
+        localStorage.setItem('id', data.userId)
         // console.log(localStorage)
       }
       
@@ -81,65 +82,38 @@ class Login extends React.Component {
     const { email, password, isChecked } = this.state;
     return (
       <React.Fragment>
-        <div className="login-page">
-          <div className="login-box">
-            <div className="login-logo">
-              <a href="/" onClick={(event) => { event.preventDefault() }}><b>Beitech</b>ADMIN</a>
-            </div>
-
-            <div className="card">
-              <div className="card-body login-card-body">
-                <p className="login-box-msg">Inicio de Sesión</p>
-
-                <form onSubmit={(event) => this.handleFormSubmit(event)}>
-                  <div className="input-group mb-3">
-                    <input type="email"
+      <div id="padre">
+        <div id="hijo">
+          <form onSubmit={(event) => this.handleFormSubmit(event)}>
+            <div className="form-group">
+              <label for="exampleDropdownFormEmail1">Email address</label>
+              <input type="email"
                       name="email"
                       className="form-control"
                       placeholder="Email"
                       value={email}
                       onChange={event => this.setState({ email: event.target.value })} />
-                    <div className="input-group-append">
-                      <div className="input-group-text">
-                        <span className="fas fa-envelope"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="input-group mb-3">
-                    <input type="password"
+            </div>
+            <div className="form-group">
+              <label for="exampleDropdownFormPassword1">Password</label>
+              <input type="password"
                       name="password"
                       className="form-control"
                       placeholder="Password"
                       value={password}
-                      onChange={event => this.setState({ password: event.target.value })} />
-                    <div className="input-group-append">
-                      <div className="input-group-text">
-                        <span className="fas fa-lock"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-8">
-                      <div className="icheck-primary">
-                        <input type="checkbox" id="remember" onChange={() => this.handleChecked()} checked={isChecked} />
-                        <label onClick={() => this.handleChecked()} id="remember-label">Recordarme</label>
-                      </div>
-                    </div>
-                    <div className="col-4">
-                      <button type="submit" className="btn btn-primary btn-block">Ingresar</button>
-                    </div>
-                  </div>
-                </form>
-
-                <p className="mb-1">
-                  <a href="forgot-password.html">Recuperar COntraseña</a>
-                </p>
-                <p className="mb-0">
-                  <a href="register.html" className="text-center">Registrar un nuevo usuario</a>
-                </p>
+                      onChange={event => this.setState({ password: event.target.value })} />            </div>
+            <div className="form-group">
+              <div className="form-check">
+                <input  className="form-check-input" type="checkbox" id="remember" onChange={() => this.handleChecked()} checked={isChecked} />
+                <label className="form-check-label" onClick={() => this.handleChecked()} id="remember-label">Recordarme</label>
               </div>
             </div>
-          </div>
+            <button type="submit" className="btn btn-primary">Sign in</button>
+          </form>
+          <div className="dropdown-divider"></div>
+          <a className="dropdown-item" href="#">New around here? Sign up</a>
+          <a className="dropdown-item" href="#">Forgot password?</a>
+        </div>
         </div>
       </React.Fragment>
     );

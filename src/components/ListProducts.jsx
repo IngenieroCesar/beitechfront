@@ -1,18 +1,9 @@
 import React from 'react'
-import ReactDom from 'react-dom'
 import UrlService from '../services/UrlService'
-import SearchOrders from '../components/SearchOrders'
-import NewOrder from '../components/NewOrder'
 import Loading from './Loading'
 import FatalError from '../pages/500'
 
-//styles
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
-
-
-class ListUsers extends React.Component {
-
+class ListProducts extends React.Component{
     //le pasamos el token a el estado de nuestro componente
     state = {
         data: [],
@@ -21,15 +12,13 @@ class ListUsers extends React.Component {
         error: null,
     }
 
-    
-
+    //Cargamos datos al cargar este componente
     async componentDidMount(){
-        await this.fetchUsers()
-        // console.log(this.state.token)
+        await this.fetchProducts()
     }
 
     //Función para la carga de los datos desde la API
-    fetchUsers = async () => {
+    fetchProducts = async () => {
         try {          
             //Creamos un objeto de configuración para enviar al API  
             let config = {
@@ -40,10 +29,9 @@ class ListUsers extends React.Component {
                 }
             }
             //Hacemos SOLICITUD al API
-            let res = await fetch(UrlService.usersUrl(), config)
+            let res = await fetch(UrlService.productsUrl(), config)
             //convertimos la respuesta
             let data = await res.json()
-            // console.log(data)
             //Usamos nuestro state para renderizar la informacíon
             this.setState({
                 //Persistimos los datos en el estado del componente
@@ -52,15 +40,21 @@ class ListUsers extends React.Component {
             })
             
         } catch (error) {
-            console.log(error)
+            this.setState({
+                error
+            })
         }
     }
+
+    //Crear un nuevo producto
+
+
 
 
 
 
     render(){
-        
+
         if(this.state.loading){
             return < Loading />
         }
@@ -69,30 +63,24 @@ class ListUsers extends React.Component {
             return <FatalError />
         }
 
-        const users = this.state.data
-        return(
+        //persistimos datos del estado data[]
+        const products = this.state.data
+
+        return (
             <section className="content">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-header">
-                                    <h3 className="card-title">Users</h3>
+                                    <h3 className="card-title">Products</h3>
                                     <div className="card-tools">
-                                        {/* Modal para nueva orden de compra */}
-                                        <div className="input-group">
-
-                                            <NewOrder                                                             
-                                                // userId={user.id}
-                                            />
-
-                                            
-                                        </div><br/>
                                         <div className="input-group input-group-sm">
                                             <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
 
                                             <div className="input-group-append">
-                                            <button type="submit" className="btn btn-default"><FontAwesomeIcon icon={faSearch} /></button>
+                                            <button type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
+                                            {/* <button type="submit" className="btn btn-primary">Nuevo</button> */}
                                             </div>
                                         </div>
                                     </div>
@@ -104,24 +92,22 @@ class ListUsers extends React.Component {
                                             <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Ordenes</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>                    
                                             {
                                                 // En este momento estamos usando la funcion map para iterar todos los elementos del arreglo,
-                                                users.map((user) => {
+                                                products.map((product) => {
                                                     return(
-                                                        <tr key={user.id}>
-                                                        <th >{user.id}</th>
-                                                        <th >{user.name}</th>
-                                                        <th >{user.email}</th>
-                                                        <th>
-                                                            <SearchOrders                                                             
-                                                                userId={user.id}
-                                                            />
-                                                        </th>
+                                                        <tr key={product.id}>
+                                                        <th>{product.id}</th>
+                                                        <th>{product.name}</th>
+                                                        <th>{product.description}</th>
+                                                        <th>{product.price}</th>
+                                                        <th>Action</th>
                                                         </tr>      
                                                     )
                                                 })
@@ -138,4 +124,4 @@ class ListUsers extends React.Component {
     }
 }
 
-export default ListUsers
+export default ListProducts

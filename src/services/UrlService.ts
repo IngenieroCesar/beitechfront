@@ -10,6 +10,8 @@ class UrlService {
   static usersUrl() { return 'api/auth/user'; }
   //URL ordenes del usuario de nuestra api
   static ordersUrl() { return 'api/auth/orders'; }
+  //URL Productos de nuestra api
+  static productsUrl() { return 'api/auth/products'; }
 }
 
 export default UrlService;
