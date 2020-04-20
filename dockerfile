@@ -1,18 +1,17 @@
-Output
-FROM node:10-alpine
+# build environment
+FROM node:alpine as builder
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+COPY package.json /usr/src/app/package.json
+RUN npm install --silent
+RUN npm install react-scripts@1.1.1 -g --silent
+COPY . /usr/src/app
+RUN npm run build
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-WORKDIR /home/node/app
-
-COPY package*.json ./
-
-USER node
-
-RUN npm install
-
-COPY --chown=node:node . .
-
-EXPOSE 8080
-
-CMD [ "node", "app.js" ]
+# production environment
+FROM nginx:alpine
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
