@@ -190,6 +190,7 @@ class NewOrder extends React.Component{
         }
         //---------------------------------------------------------------------
         //Enviamos los datos a la API
+        console.log(Object.values(formulario))
         try {            
             let config = {
                 method: 'POST',
@@ -208,6 +209,8 @@ class NewOrder extends React.Component{
             this.setState({
                 isOpen: false
               })
+
+              alert(data.message)
             
             } catch (error) {
                 //Usamos nuestro state para renderizar la informacíon

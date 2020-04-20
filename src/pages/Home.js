@@ -8,17 +8,9 @@ class Home extends React.Component {
     state = {
         links : [
             {
-            'nombre': 'Perfil', 
-            'link': '/perfil'
-            },
-            {
             'nombre': 'Productos', 
             'link': '/productos'
             },
-            {
-            'nombre': 'Ordenes', 
-            'link': '/ordenes'
-            }
         ]
     }
 

@@ -6,7 +6,7 @@ import FatalError from '../pages/500'
 
 //Styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faAddressBook } from '@fortawesome/free-solid-svg-icons'
 import "bootstrap/dist/css/bootstrap.min.css";
 import  { Modal }  from  'react-bootstrap' ;
 
@@ -103,7 +103,7 @@ class SearchOrder extends React.Component{
 
         return(
             <React.Fragment>
-            <button className="btn btn-info" alt="Editar" title="Editar" onClick={this.showModal} value={userId}><FontAwesomeIcon icon={faEye} /></button>
+            <button className="btn btn-info" alt="Editar" title="Editar" onClick={this.showModal} value={userId}><FontAwesomeIcon icon={faAddressBook} /></button>
             <Modal 
             show={this.state.isOpen} 
             onHide={this.hideModal}

@@ -111,8 +111,8 @@ class Login extends React.Component {
             <button type="submit" className="btn btn-primary">Sign in</button>
           </form>
           <div className="dropdown-divider"></div>
-          <a className="dropdown-item" href="#">New around here? Sign up</a>
-          <a className="dropdown-item" href="#">Forgot password?</a>
+          <a className="dropdown-item">New around here? Sign up</a>
+          <a className="dropdown-item">Forgot password?</a>
         </div>
         </div>
       </React.Fragment>

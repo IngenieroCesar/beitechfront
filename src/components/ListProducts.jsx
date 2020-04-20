@@ -75,14 +75,6 @@ class ListProducts extends React.Component{
                                 <div className="card-header">
                                     <h3 className="card-title">Products</h3>
                                     <div className="card-tools">
-                                        <div className="input-group input-group-sm">
-                                            <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
-
-                                            <div className="input-group-append">
-                                            <button type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
-                                            {/* <button type="submit" className="btn btn-primary">Nuevo</button> */}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 

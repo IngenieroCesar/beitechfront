@@ -21,8 +21,6 @@ class ListUsers extends React.Component {
         error: null,
     }
 
-    
-
     async componentDidMount(){
         await this.fetchUsers()
         // console.log(this.state.token)
@@ -86,15 +84,7 @@ class ListUsers extends React.Component {
                                                 // userId={user.id}
                                             />
 
-                                            
                                         </div><br/>
-                                        <div className="input-group input-group-sm">
-                                            <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
-
-                                            <div className="input-group-append">
-                                            <button type="submit" className="btn btn-default"><FontAwesomeIcon icon={faSearch} /></button>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 

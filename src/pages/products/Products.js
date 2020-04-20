@@ -7,17 +7,9 @@ class Products extends React.Component{
     state = {
         links : [
             {
-            'nombre': 'Perfil', 
-            'link': '/perfil'
-            },
-            {
             'nombre': 'Home', 
             'link': '/'
             },
-            {
-            'nombre': 'Ordenes', 
-            'link': '/ordenes'
-            }
         ]
     }
     //comprobamos la sesión iniciada con el token en nuestra variable global
