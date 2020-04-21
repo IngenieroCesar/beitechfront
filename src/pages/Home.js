@@ -17,9 +17,9 @@ class Home extends React.Component {
 
 //comprobamos la sesión iniciada con el token en nuestra variable global
     componentDidMount(){
-        if(localStorage.token == 0){
-            this.props.history.push('/login')
-        }
+        // if(localStorage.token == 0){
+        //     this.props.history.push('/login')
+        // }
     }
 
     render(){
