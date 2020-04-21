@@ -1,5 +1,3 @@
-
-
 let apiDomain = ''
 if (process.env.NODE_ENV === 'production') {
   apiDomain = 'https://back.admiapp.com/';
@@ -23,3 +21,5 @@ class UrlService {
     //URL crear orden del usuario de nuestra api
   static createOrdersUrl() { return apiDomain + 'api/auth/order'; }
 }
+
+export default UrlService;
