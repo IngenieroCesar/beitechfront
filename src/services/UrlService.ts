@@ -5,6 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   apiDomain = 'https://back.admiapp.com/';
 }
 
+
 class UrlService {
   //URL login de nuestra api
   static loginUrl() { return apiDomain + 'api/auth/login'; }

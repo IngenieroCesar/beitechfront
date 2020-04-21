@@ -14,7 +14,7 @@ class Products extends React.Component{
     }
     //comprobamos la sesión iniciada con el token en nuestra variable global
     componentDidMount(){
-        if(localStorage.token == 0){
+        if(localStorage.token === 0){
             this.props.history.push('/login')
         }
     }

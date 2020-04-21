@@ -23,8 +23,10 @@ class ListProducts extends React.Component{
             //Creamos un objeto de configuración para enviar al API  
             let config = {
                 method: 'GET',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                     'Authorization': this.state.token
                 }
             }

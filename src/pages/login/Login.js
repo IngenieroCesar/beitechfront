@@ -1,9 +1,8 @@
 import React from "react";
+import axios from 'axios';
 import UrlService from './../../services/UrlService';
 import '../../components/styles/style.css'
 import FatalError from '../500'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class Login extends React.Component {
   state = {
@@ -34,19 +33,24 @@ class Login extends React.Component {
       remember_me: this.state.isChecked
     }
 
+    let jsonpostdata = JSON.stringify({postData: postData});
+
     try {            
-      let config = {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'X-Requested-With': 'XMLHttpRequest',
-          },
-          body: JSON.stringify(postData)
-      }
-      //Hacemos llamado al API
-      let res = await fetch(UrlService.loginUrl(), config)
-      //convertimos la respuesta
-      let data = await res.json()
+            //Creamos un objeto de configuración para enviar al API  
+            let config = {
+              method: 'POST',
+              mode: 'cors',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': '*',
+              },
+              body: JSON.stringify(postData)
+          }
+          //Hacemos SOLICITUD al API
+          let res = await fetch(UrlService.loginUrl(), config)
+          //convertimos la respuesta
+          let data = await res.json()
+          console.log(data)
 
       // console.log(data)
       if(data.access_token){
@@ -60,10 +64,11 @@ class Login extends React.Component {
       //Redireccionamos hacia la vista
       this.props.history.push('/')
       } catch (error) {
+          console.log(error)
           //Usamos nuestro state para renderizar la informacíon
           this.setState({
               //Cambiamos el estado de Loading cuando carguen nuestros datos
-              error
+              
           })
       }
   }
@@ -111,8 +116,8 @@ class Login extends React.Component {
             <button type="submit" className="btn btn-primary">Sign in</button>
           </form>
           <div className="dropdown-divider"></div>
-          <a className="dropdown-item">New around here? Sign up</a>
-          <a className="dropdown-item">Forgot password?</a>
+          {/* <a className="dropdown-item">New around here? Sign up</a>
+          <a className="dropdown-item">Forgot password?</a> */}
         </div>
         </div>
       </React.Fragment>

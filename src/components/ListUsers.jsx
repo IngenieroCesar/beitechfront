@@ -1,14 +1,9 @@
 import React from 'react'
-import ReactDom from 'react-dom'
 import UrlService from '../services/UrlService'
 import SearchOrders from '../components/SearchOrders'
 import NewOrder from '../components/NewOrder'
 import Loading from './Loading'
 import FatalError from '../pages/500'
-
-//styles
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 
 
 class ListUsers extends React.Component {
@@ -32,8 +27,10 @@ class ListUsers extends React.Component {
             //Creamos un objeto de configuración para enviar al API  
             let config = {
                 method: 'GET',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                     'Authorization': this.state.token
                 }
             }

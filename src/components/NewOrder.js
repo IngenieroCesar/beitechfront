@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDom from 'react-dom'
 import UrlService from '../services/UrlService';
 import Loading from './Loading'
 import FatalError from '../pages/500'
@@ -70,8 +69,10 @@ class NewOrder extends React.Component{
             //Creamos un objeto de configuración para enviar al API  
             let config = {
                 method: 'GET',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                     'Authorization': this.state.token
                 }
             }
@@ -98,9 +99,9 @@ class NewOrder extends React.Component{
         console.log(e.target.value)
         const formulario = this.state.form
 
-        if(formulario.product1.name != e.target.value & formulario.product2.name != e.target.value &
-            formulario.product3.name != e.target.value & formulario.product4.name != e.target.value &
-            formulario.product5.name != e.target.value 
+        if(formulario.product1.name !== e.target.value & formulario.product2.name !== e.target.value &
+            formulario.product3.name !== e.target.value & formulario.product4.name !== e.target.value &
+            formulario.product5.name !== e.target.value 
         ){
             this.setState({
                 form:{
@@ -137,13 +138,13 @@ class NewOrder extends React.Component{
         //del objeto formulario que se va actualizando cada vez que interactuamos con los elementos
         //del formulario:
 
-        if(formulario.product1.name == e.target.value || formulario.product2.name == e.target.value){
+        if(formulario.product1.name === e.target.value || formulario.product2.name === e.target.value){
             console.log(e.target.value)
             alert('El Producto '+ e.target.value + ' ya ha sido seleccionado, Cambialo ya que no se registrara nuevamente.')
-        }else if(formulario.product3.name == e.target.value || formulario.product4.name == e.target.value){
+        }else if(formulario.product3.name === e.target.value || formulario.product4.name === e.target.value){
             console.log(e.target.value)
             alert('El Producto '+ e.target.value + ' ya ha sido seleccionado, Cambialo ya que no se registrara nuevamente.')
-        }else if(formulario.product5.name == e.target.value){
+        }else if(formulario.product5.name === e.target.value){
             console.log(e.target.value)
             alert('El Producto '+ e.target.value + ' ya ha sido seleccionado, Cambialo ya que no se registrara nuevamente.')
         }
@@ -154,20 +155,20 @@ class NewOrder extends React.Component{
     fetchOrder = async e => {
         //Validación de campo cantidad si existe campo producto:
         const formulario = this.state.form
-        if(formulario.product1.name != '' & formulario.product1.quantity == '' ||
-           formulario.product2.name != '' & formulario.product2.quantity == '' ||
-           formulario.product3.name != '' & formulario.product3.quantity == '' ||
-           formulario.product4.name != '' & formulario.product4.quantity == '' ||
-           formulario.product5.name != '' & formulario.product5.quantity == ''
+        if(formulario.product1.name !== '' & formulario.product1.quantity === '' ||
+           formulario.product2.name !== '' & formulario.product2.quantity === '' ||
+           formulario.product3.name !== '' & formulario.product3.quantity === '' ||
+           formulario.product4.name !== '' & formulario.product4.quantity === '' ||
+           formulario.product5.name !== '' & formulario.product5.quantity === ''
         ){
             console.log('falta la cantidad')
             alert('Falta la cantidad para uno de los productos, por favor completalo, ó elige el campo "Sin Registro"')
             return
-        }else if(formulario.product1.name == '' & formulario.product1.quantity != '' ||
-        formulario.product2.name == '' & formulario.product2.quantity != '' ||
-        formulario.product3.name == '' & formulario.product3.quantity != '' ||
-        formulario.product4.name == '' & formulario.product4.quantity != '' ||
-        formulario.product5.name == '' & formulario.product5.quantity != ''
+        }else if(formulario.product1.name === '' & formulario.product1.quantity !== '' ||
+        formulario.product2.name === '' & formulario.product2.quantity !== '' ||
+        formulario.product3.name === '' & formulario.product3.quantity !== '' ||
+        formulario.product4.name === '' & formulario.product4.quantity !== '' ||
+        formulario.product5.name === '' & formulario.product5.quantity !== ''
         ){
          
          alert('Falta asignar el producto a la cantidad seleccionada, por favor completalo, ó elige el campo "Sin Registro"')
@@ -176,11 +177,11 @@ class NewOrder extends React.Component{
         
         //-------------------------------------------------------------------
         //Comprobación de que el formulario vaya vasio:
-        if(formulario.product1.name == '' & formulario.product1.quantity == '' &
-        formulario.product2.name == '' & formulario.product2.quantity == '' &
-        formulario.product3.name == '' & formulario.product3.quantity == '' &
-        formulario.product4.name == '' & formulario.product4.quantity == '' &
-        formulario.product5.name == '' & formulario.product5.quantity == ''
+        if(formulario.product1.name === '' & formulario.product1.quantity === '' &
+        formulario.product2.name === '' & formulario.product2.quantity === '' &
+        formulario.product3.name === '' & formulario.product3.quantity === '' &
+        formulario.product4.name === '' & formulario.product4.quantity === '' &
+        formulario.product5.name === '' & formulario.product5.quantity === ''
         ){
             this.setState({
                 isOpen: false
@@ -194,8 +195,10 @@ class NewOrder extends React.Component{
         try {            
             let config = {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                     'Authorization': this.state.token
                 },
                 body: JSON.stringify(this.state.form)

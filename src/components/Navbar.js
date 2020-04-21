@@ -1,6 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
-import { BrowserRouter as Router } from 'react-router-dom'; 
+
 
 //Función nav bar que resive como props los links:
 class Navbar extends React.Component{

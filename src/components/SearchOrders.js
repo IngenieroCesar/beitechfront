@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDom from 'react-dom'
 import UrlService from '../services/UrlService';
 import Loading from './Loading'
 import FatalError from '../pages/500'
@@ -32,8 +31,10 @@ class SearchOrder extends React.Component{
             //Creamos un objeto de configuración para enviar al API  
             let config = {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
                     'Authorization': this.state.token
                 },
                 body: JSON.stringify(postData)
