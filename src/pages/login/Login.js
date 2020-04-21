@@ -1,5 +1,4 @@
 import React from "react";
-import axios from 'axios';
 import UrlService from './../../services/UrlService';
 import '../../components/styles/style.css'
 import FatalError from '../500'
